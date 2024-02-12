@@ -1,0 +1,1 @@
+Fetches an artwork based on what day it is.
