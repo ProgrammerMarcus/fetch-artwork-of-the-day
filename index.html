@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TCG Booster Simulator</title>
-    <script defer type="module" src="index.js"></script>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
-    <header class="header">
-        <h1 class="header-title">TCG Booster Simulator</h1>
-    </header>
-    <main class="main">
-        <div class="set-selector">
-            <template id="template-set">
-                <div class="set">
-                    <img src="assets/unknown.webp" alt="A TCG set" class="set-img">
-                    <span class="set-name">NAME</span>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TCG Booster Simulator</title>
+        <script defer type="module" src="index.js"></script>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <header class="header">
+            <h1 class="header-title">TCG Booster Simulator</h1>
+        </header>
+        <main class="main">
+            <div class="set-selector">
+                <template id="template-set">
+                    <div class="set">
+                        <img src="assets/unknown.webp" alt="A TCG set" class="set-img" />
+                        <span class="set-name">NAME</span>
+                    </div>
+                </template>
+                <div class="set-choice"></div>
+            </div>
+            <template id="template-pull">
+                <div class="wrapper">
+                    <img src="assets/placeholder.webp" alt="A card drawn from the booster" class="pull" />
+                    <img src="assets/placeholder.webp" alt="Backside of card." class="pull-back" />
                 </div>
             </template>
-            <div class="set-choice">
-
-            </div>
-        </div>
-        <template id="template-pull">
-            <div class="wrapper">
-                <img src="assets/placeholder.webp" alt="A card drawn from the booster" class="pull">
-                <img src="assets/placeholder.webp" alt="Backside of card." class="pull-back">
-            </div>
-        </template>
-        <div class="pulls">
-        </div>
-    </main>
-</body>
+            <div class="pulls"></div>
+        </main>
+    </body>
 </html>

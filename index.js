@@ -53,8 +53,8 @@ async function getCards(set) {
 
 function addXSets(x) {
     for (let i = 1; i <= x; i++) {
-        addSetToDOM(sets.length - i)
+        addSetToDOM(sets.length - i);
     }
 }
 
-addXSets(10)
+addXSets(10);
