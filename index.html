@@ -8,23 +8,26 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <header>
-        <h1>TCG Booster simulator</h1>
+    <header class="header">
+        <h1 class="header-title">TCG Booster Simulator</h1>
     </header>
-    <main>
+    <main class="main">
         <div class="set-selector">
             <template id="template-set">
                 <div class="set">
                     <img src="assets/unknown.webp" alt="A TCG set" class="set-img">
+                    <span class="set-name">NAME</span>
                 </div>
             </template>
             <div class="set-choice">
 
             </div>
         </div>
+        <template id="template-pull">
+            <img src="assets/placeholder.webp" alt="A card drawn from the booster" class="pull">
+        </template>
+        <div class="pulls">
+        </div>
     </main>
-    <footer>
-
-    </footer>
 </body>
 </html>
