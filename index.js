@@ -51,11 +51,10 @@ async function getCards(set) {
     }
 }
 
-addSetToDOM(sets.length - 1);
-addSetToDOM(sets.length - 2);
-addSetToDOM(sets.length - 3);
-addSetToDOM(sets.length - 4);
-addSetToDOM(sets.length - 5);
-addSetToDOM(sets.length - 6);
+function addXSets(x) {
+    for (let i = 1; i <= x; i++) {
+        addSetToDOM(sets.length - i)
+    }
+}
 
-getCards(1);
+addXSets(10)
