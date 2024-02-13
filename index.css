@@ -3,6 +3,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-image: url("/assets/bg.webp");
     background-size: cover;
+    overflow: hidden;
 }
 
 .header {
@@ -20,26 +21,36 @@ body {
     backdrop-filter: blur(5px);
     border-bottom: 1px solid #ffffff50;
     padding: 10px;
+    display: grid;
+    grid-template: 1fr / 10% 80% 10%;
+    .set-btn {
+        width: 50%;
+        margin: auto;
+        
+    }
     .set-choice {
         display: grid;
-        grid-template: repeat(1, 176px) / repeat(10, 128px);
+        grid-template: repeat(1, 176px) / repeat(10, min-content);
         place-content: center;
-        gap: 15px;
         .set {
             border: 6px solid #ffe265;
             box-sizing: border-box;
             position: relative;
+            left: 40px;
+            margin-left: -80px;
             height: 100%;
             display: grid;
-            grid-template: auto min-content / 1fr;
+            grid-template: 100% min-content / 1fr;
             background-color: white;
             border-radius: 10px;
             aspect-ratio: 1.25;
             box-shadow: -3px 0 4px rgba(0, 0, 0, 0.3);
             .set-img {
-                width: 90%;
+                width: 95%;
+                height: 95%;
                 object-fit: contain;
                 margin: auto auto;
+
             }
             .set-name {
                 display: block;
@@ -63,11 +74,17 @@ body {
     0% {
         transform: rotateY(180deg);
         display: none;
+        opacity: 0;
+    }
+    49% {
+        opacity: 0;
     }
     50% {
+        opacity: 1;
         display: block;
     }
     100% {
+        opacity: 1;
         transform: rotateY(0deg);
         display: block;
     }
@@ -87,6 +104,15 @@ body {
     }
 }
 
+@keyframes slide-in {
+    0% {
+        left: -100lvw;
+    }
+    100% {
+        left: 0px;
+    }
+}
+
 .pulls {
     display: grid;
     grid-template: repeat(2, min-content) / repeat(5, min-content);
@@ -97,24 +123,40 @@ body {
         position: relative;
     }
     .pull {
+        position: relative;
+        bottom: 0px;
         height: 320px;
+        z-index: 1;
+        opacity: 0;
+    }
+    .pull.click {
         animation-name: flip;
         animation-duration: 0.8s;
         animation-timing-function: linear;
-        z-index: 1;
+        animation-fill-mode: forwards;
     }
     .pull:hover {
-        position: relative;
-        transform: scale(1.6);
-        transition: 0.2s;
+        transform: scale(1.6) !important;
         z-index: 99;
         bottom: 80px;
+        transition: 0.2s;
     }
     .pull-back {
         position: absolute;
         bottom: 0;
         left: 0;
         height: 320px;
+        z-index: 2;
+        animation-name: slide-in;
+        animation-duration: 0.5s;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+    }
+    .pull-back:hover {
+        transform: rotateY(-30deg);
+        transition: 0.3s;
+    }
+    .pull-back.click {
         animation-name: flip-reverse;
         animation-duration: 0.8s;
         animation-fill-mode: forwards;

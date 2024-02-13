@@ -13,6 +13,7 @@
         </header>
         <main class="main">
             <div class="set-selector">
+                <img src="assets/back.svg" class="set-btn back" alt="Previous set">
                 <template id="template-set">
                     <div class="set">
                         <img src="assets/unknown.webp" alt="A TCG set" class="set-img" />
@@ -20,10 +21,13 @@
                     </div>
                 </template>
                 <div class="set-choice"></div>
+                <img src="assets/next.svg" class="set-btn next" alt="Next set">
             </div>
             <template id="template-pull">
                 <div class="wrapper">
-                    <img src="assets/placeholder.webp" alt="A card drawn from the booster" class="pull" />
+                    <object class="pull" data="" type="image/png">
+                        <img src="assets/missing.webp" alt="A card drawn from the booster" class="pull" />
+                      </object>
                     <img src="assets/placeholder.webp" alt="Backside of card." class="pull-back" />
                 </div>
             </template>

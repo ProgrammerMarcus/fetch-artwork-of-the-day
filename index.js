@@ -21,6 +21,11 @@ function addSetToDOM(position) {
     const target = document.querySelector(".set-choice");
     const template = document.querySelector("#template-set");
     let clone = template.cloneNode(true).content;
+    try {
+        sets[position].logo;
+    } catch {
+        return;
+    }
     if (sets[position].logo) {
         clone.querySelector(".set-img").src = sets[position].logo + ".webp";
         clone.querySelector(".set-img").alt = sets[position].name;
@@ -46,15 +51,43 @@ async function getCards(set) {
         const randomCard = Math.floor(Math.random() * sets[set].cardCount.official) + 1;
         let response = await fetch(`https://api.tcgdex.net/v2/en/sets/${sets[set].id}/${randomCard}`);
         let data = await response.json();
-        clone.querySelector(".pull").src = data.image + "/high.webp";
+        clone.querySelector(".pull").data = data.image + "/high.webp";
+        clone.querySelector(".wrapper").addEventListener("click", (e) => {
+            if (e.srcElement.classList.contains("pull-back")) {
+                e.srcElement.classList.add("click");
+                e.srcElement.previousElementSibling.classList.add("click");
+            } else if (e.srcElement.matches(".pull.click")) {
+                window.open(e.srcElement.data);
+            }
+        });
         target.appendChild(clone);
     }
 }
 
-function addXSets(x) {
-    for (let i = 1; i <= x; i++) {
-        addSetToDOM(sets.length - i);
+let setPointer = sets.length;
+
+function addXSets(reverse) {
+    if (reverse && setPointer > 0) {
+        document.querySelector(".set-choice").replaceChildren();
+        setPointer -= 10;
+        for (let i = 0; i < 10; i++) {
+            addSetToDOM(setPointer + i);
+        }
+    } else if (!reverse && setPointer < sets.length - 10) {
+        document.querySelector(".set-choice").replaceChildren();
+        setPointer += 10;
+        for (let i = 0; i < 10; i++) {
+            addSetToDOM(setPointer + i);
+        }
     }
 }
 
-addXSets(10);
+addXSets(10, true);
+
+document.querySelector(".set-selector > .back").addEventListener("click", () => {
+    addXSets(true);
+});
+
+document.querySelector(".set-selector > .next").addEventListener("click", () => {
+    addXSets(false);
+});
