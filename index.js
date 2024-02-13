@@ -1,21 +1,26 @@
 let sets = [];
+let setPointer = sets.length;
 
 function getSets() {
     if (localStorage.getItem("sets")) {
         console.log("Loading sets from localStorage");
         sets = JSON.parse(localStorage.getItem("sets"));
+        setPointer = sets.length;
+        addXSets(10, true);
     } else {
         let fetchSets = async function () {
             console.log("Fetching sets from server");
             let response = await fetch("https://api.tcgdex.net/v2/en/sets");
-            sets = await response.json();
+            let data = await response.json();
+            sets = data.filter((a) => a.logo && !a.name.includes(" Promos"));
+            console.log(sets);
             localStorage.setItem("sets", JSON.stringify(sets));
+            setPointer = sets.length;
+            addXSets(10, true);
         };
         fetchSets();
     }
 }
-
-getSets();
 
 function addSetToDOM(position) {
     const target = document.querySelector(".set-choice");
@@ -52,6 +57,12 @@ async function getCards(set) {
         let response = await fetch(`https://api.tcgdex.net/v2/en/sets/${sets[set].id}/${randomCard}`);
         let data = await response.json();
         clone.querySelector(".pull").data = data.image + "/high.webp";
+        clone.querySelector(".wrapper").addEventListener("mouseover", (e) => {
+            if (e.srcElement.classList.contains("pull-back")) {
+                e.srcElement.classList.add("click");
+                e.srcElement.previousElementSibling.classList.add("click");
+            }
+        });
         clone.querySelector(".wrapper").addEventListener("click", (e) => {
             if (e.srcElement.classList.contains("pull-back")) {
                 e.srcElement.classList.add("click");
@@ -63,8 +74,6 @@ async function getCards(set) {
         target.appendChild(clone);
     }
 }
-
-let setPointer = sets.length;
 
 function addXSets(reverse) {
     if (reverse && setPointer > 0) {
@@ -82,8 +91,6 @@ function addXSets(reverse) {
     }
 }
 
-addXSets(10, true);
-
 document.querySelector(".set-selector > .back").addEventListener("click", () => {
     addXSets(true);
 });
@@ -91,3 +98,5 @@ document.querySelector(".set-selector > .back").addEventListener("click", () => 
 document.querySelector(".set-selector > .next").addEventListener("click", () => {
     addXSets(false);
 });
+
+getSets();

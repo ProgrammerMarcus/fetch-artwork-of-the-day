@@ -6,6 +6,15 @@ body {
     overflow: hidden;
 }
 
+img, object {
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
 .header {
     background-color: black;
     padding: 0.5rem;
@@ -73,20 +82,14 @@ body {
 @keyframes flip {
     0% {
         transform: rotateY(180deg);
-        display: none;
-        opacity: 0;
-    }
-    49% {
-        opacity: 0;
+        visibility: hidden;
     }
     50% {
-        opacity: 1;
-        display: block;
+        visibility: hidden;
     }
     100% {
-        opacity: 1;
         transform: rotateY(0deg);
-        display: block;
+        visibility: visible;
     }
 }
 
@@ -109,7 +112,8 @@ body {
         left: -100lvw;
     }
     100% {
-        left: 0px;
+        left: 1px;
+        top: -1px;
     }
 }
 
@@ -127,7 +131,7 @@ body {
         bottom: 0px;
         height: 320px;
         z-index: 1;
-        opacity: 0;
+        visibility: hidden;
     }
     .pull.click {
         animation-name: flip;
@@ -143,12 +147,12 @@ body {
     }
     .pull-back {
         position: absolute;
-        bottom: 0;
-        left: 0;
         height: 320px;
         z-index: 2;
+        left: 1px;
+        top: -1px;
         animation-name: slide-in;
-        animation-duration: 0.5s;
+        animation-duration: 0.2s;
         animation-timing-function: linear;
         animation-fill-mode: forwards;
     }
