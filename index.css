@@ -6,13 +6,43 @@ body {
     overflow: hidden;
 }
 
-img, object {
-    user-drag: none;
+img,
+object {
     -webkit-user-drag: none;
-    user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    user-select: none;
+}
+@media only screen and (max-width: 600px) {
+    * {
+        overflow: hidden;
+    }
+    div.pls-rotate {
+        display: grid;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        z-index: 999;
+        display: grid;
+        place-content: center;
+        color: white;
+        gap: 20px;
+        .rotate {
+            width: 100%;
+            margin: 0 auto;
+        }
+        .rotate-msg {
+            width: 100%;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+    }
+}
+
+.pls-rotate {
+    display: none;
 }
 
 .header {
@@ -22,6 +52,15 @@ img, object {
         margin: 0;
         color: white;
         font-weight: normal;
+    }
+}
+
+@keyframes smoother {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
     }
 }
 
@@ -35,13 +74,29 @@ img, object {
     .set-btn {
         width: 50%;
         margin: auto;
-        
+    }
+    @media only screen and (max-width: 960px) {
+        div.set-choice {
+            grid-template: repeat(2, 128px) / repeat(5, min-content);
+            gap: 5px;
+        }
+    }
+    @media only screen and (min-width: 960px) and (max-width: 1800px) {
+        div.set-choice {
+            grid-template: repeat(1, 110px) / repeat(10, min-content);
+            gap: 5px;
+        }
     }
     .set-choice {
         display: grid;
         grid-template: repeat(1, 176px) / repeat(10, min-content);
         place-content: center;
         .set {
+            cursor: pointer;
+            animation-name: smoother;
+            animation-duration: 0.3s;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
             border: 6px solid #ffe265;
             box-sizing: border-box;
             position: relative;
@@ -59,7 +114,6 @@ img, object {
                 height: 95%;
                 object-fit: contain;
                 margin: auto auto;
-
             }
             .set-name {
                 display: block;
@@ -73,10 +127,16 @@ img, object {
         }
         .set:hover {
             z-index: 99;
-            transform: scale(1.2);
+            transform: scale(1.2) !important;
             transition: transform 0.2s;
         }
     }
+}
+
+.set-btn:hover {
+    transform: scale(1.1);
+    transition: 0.1s;
+    cursor: pointer;
 }
 
 @keyframes flip {
@@ -123,6 +183,15 @@ img, object {
     gap: 10px;
     place-content: center;
     margin: 20px auto auto auto;
+    @media only screen and (max-width: 960px) {
+        grid-template: min-content / repeat(3, auto);
+        justify-content: space-around;
+        .pull,
+        .pull-back {
+            width: 30svw;
+            object-fit: contain;
+        }
+    }
     .wrapper {
         position: relative;
     }
@@ -132,6 +201,7 @@ img, object {
         height: 320px;
         z-index: 1;
         visibility: hidden;
+        cursor: pointer;
     }
     .pull.click {
         animation-name: flip;
