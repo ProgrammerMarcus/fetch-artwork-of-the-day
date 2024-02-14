@@ -1,1 +1,1 @@
-Fetches an artwork based on what day it is.
+Simulates opening cards from booster packs. Rates are (probably) not accurate.
